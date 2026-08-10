@@ -22,7 +22,6 @@ services:
       dockerfile: docker/Dockerfile
 
     container_name: b2b_streamlit
-
     restart: unless-stopped
 
     env_file:
