@@ -1,0 +1,20 @@
+# Data processing
+pandas
+numpy
+
+# HTTP / API
+requests
+
+# AWS
+boto3
+
+# PostgreSQL
+psycopg2-binary
+SQLAlchemy
+
+# Dashboard
+streamlit
+plotly
+
+# Environment variables
+python-dotenv
