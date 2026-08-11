@@ -18,3 +18,5 @@ plotly
 
 # Environment variables
 python-dotenv
+
+pip install sqlalchemy psycopg2-binary

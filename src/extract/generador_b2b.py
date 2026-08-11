@@ -3,6 +3,7 @@ import pandas as pd
 import random
 import uuid
 from datetime import datetime
+import os
 
 # ==========================================
 # 1. FUNCIÓN PARA EXTRAER LA UF DESDE LA API
@@ -85,8 +86,19 @@ if __name__ == "__main__":
 
     # Paso 3: Exportar a CSV
     nombre_archivo = f"ventas_b2b_raw_{datetime.now().strftime('%Y%m%d')}.csv"
-    df.to_csv(nombre_archivo, index=False)
+
+    # Definir la ruta para guardar el archivo en la carpeta 'data/raw'
+    ruta_carpeta = os.path.join("data", "raw")
+
+    # En el caso de que no exita la carpeta la creamos
+    os.makedirs(ruta_carpeta, exist_ok=True)
+
+    # unimos la carpeta con el nombre del archivo para obtener la ruta completa
+    ruta_completa = os.path.join(ruta_carpeta, nombre_archivo)
+
+    df.to_csv(ruta_completa, index=False)
 
     print(f"✅ Proceso finalizado. Archivo generado: {nombre_archivo}")
+    print(f"Archivo guardado en: {ruta_completa}")
     print("\nVista previa de los datos:")
     print(df[['id_transaccion', 'producto', 'total_clp', 'total_uf']].head())
