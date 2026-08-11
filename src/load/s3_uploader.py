@@ -21,6 +21,7 @@ def subir_a_s3(ruta_archivo_local, nombre_bucket, ruta_en_s3):
     # Inicializamos el cliente s3
     # Boto3 leerá automátcamente las credenciales de tu archivo .env
     s3_client = boto3.client(
+        's3',
         aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID'),
         aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY'),
         region_name = os.getenv('AWS_REGION', 'us-east-1')  # Puedes cambiar la región según tus necesidades

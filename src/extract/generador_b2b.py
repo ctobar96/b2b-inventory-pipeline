@@ -18,6 +18,7 @@ def obtener_uf_daria():
         # Extraemos el valor del primer registro (el más reciente)
         valor_uf_hoy = data['serie'][0]['valor']
         return valor_uf_hoy
+    
     except Exception as e:
         print(f"Error al obtener la UF: {e}")
         return None
@@ -66,39 +67,3 @@ def generar_ventas_b2b(num_registros=50, valor_uf=None):
         # Convertimos a lista a diccionario en un DataFrame de pandas
     df_ventas = pd.DataFrame(ventas)
     return df_ventas
-
-# ==========================================
-# 3. EJECUCIÓN PRINCIPAL DEL PIPELINE FASE 1
-# ==========================================
-if __name__ == "__main__":
-    print("Iniciando la generación de datos de ventas B2B")
-
-    #Paso 1: Obtener UF
-    uf_hoy = obtener_uf_daria()
-    if uf_hoy:
-        print(f"Valor de la UF hoy: {uf_hoy}")
-    else:
-        print("No se pudo obtener el valor de la UF. Se continuará sin conversión a UF.")
-
-    # Paso 2: Generar datos sinteticos de ventas B2B
-    print("Generando datos de ventas e inventario")
-    df = generar_ventas_b2b(num_registros=100, valor_uf=uf_hoy)
-
-    # Paso 3: Exportar a CSV
-    nombre_archivo = f"ventas_b2b_raw_{datetime.now().strftime('%Y%m%d')}.csv"
-
-    # Definir la ruta para guardar el archivo en la carpeta 'data/raw'
-    ruta_carpeta = os.path.join("data", "raw")
-
-    # En el caso de que no exita la carpeta la creamos
-    os.makedirs(ruta_carpeta, exist_ok=True)
-
-    # unimos la carpeta con el nombre del archivo para obtener la ruta completa
-    ruta_completa = os.path.join(ruta_carpeta, nombre_archivo)
-
-    df.to_csv(ruta_completa, index=False)
-
-    print(f"✅ Proceso finalizado. Archivo generado: {nombre_archivo}")
-    print(f"Archivo guardado en: {ruta_completa}")
-    print("\nVista previa de los datos:")
-    print(df[['id_transaccion', 'producto', 'total_clp', 'total_uf']].head())
