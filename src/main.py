@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 # Importarmos los módulos de extracción y carga
 from src.extract.generador_b2b import generar_ventas_b2b, obtener_uf_daria
 from src.load.s3_uploader import subir_a_s3
+from src.transform.data_cleaner import procesar_y_cargar_db
 
 # Cargamos las variables ocultas desde el archivo .env
 load_dotenv()
@@ -45,7 +46,7 @@ def ejecutar_pipeline():
     print(f"Archivo guardado en: {ruta_completa}")
     print("\nVista previa de los datos:")
     print(df[['id_transaccion', 'producto', 'total_clp', 'total_uf']].head())
-
+    print() # Salto de línea estético
 
     # ==============================================================================================================================
     # FASE 2: CARGA A S3    
@@ -65,12 +66,26 @@ def ejecutar_pipeline():
     # Llamamos a la función para subir el archivo a S3
     subida_exitosa = subir_a_s3(ruta_completa, bucket_destino, ruta_s3)
 
-    if subida_exitosa:
-        print(f"✅ Archivo '{nombre_archivo}' subido exitosamente a S3 en la ruta: 's3://{bucket_destino}/{ruta_s3}'")
+    print() # Salto de línea estético
+    
+    # ==============================================================================================================================
+    # FASE 2: CARGA A S3    
+    # ==============================================================================================================================
+    print("--> FASE 3: Transformación y Carga a Base de Datos (PostgreSQL)")
+
+    # Llamamos a la función para procesar y cargar los datos a PostgreSQL
+    carga_db_exitosa = procesar_y_cargar_db(ruta_completa)
+
+    # Resumen Final
+    print("\n==================== RESUMEN FINAL ====================")
+    if carga_db_exitosa and subida_exitosa:
+        print("✅ Pipeline completado exitosamente. Datos generados, subidos a S3 y cargados en PostgreSQL.")
+    elif not carga_db_exitosa and subida_exitosa:
+        print("⚠️ Pipeline completado parcialmente. Datos subidos a S3, pero hubo un error al cargar en PostgreSQL.")
+    elif carga_db_exitosa and not subida_exitosa:
+        print("⚠️ Pipeline completado parcialmente. Datos cargados en PostgreSQL, pero hubo un error al subir a S3.")
     else:
-        print(f"❌ Error al subir el archivo '{nombre_archivo}' a S3.")
-
-
+        print("❌ Pipeline fallido. Hubo errores tanto al subir a S3 como al cargar en PostgreSQL.")
 
 
 if __name__ == "__main__":
