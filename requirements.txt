@@ -1,5 +1,5 @@
 # Data processing
-pandas
+pandas==2.2.0
 numpy
 
 # HTTP / API
@@ -9,14 +9,16 @@ requests
 boto3
 
 # PostgreSQL
-psycopg2-binary
-SQLAlchemy
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.25
 
 # Dashboard
-streamlit
-plotly
+streamlit==1.31.0
+plotly==5.18.0
 
 # Environment variables
-python-dotenv
+python-dotenv==1.0.1
 
-pip install sqlalchemy psycopg2-binary
+
+
+
