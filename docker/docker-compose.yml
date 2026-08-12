@@ -1,18 +1,16 @@
 services:
-
   postgres:
     image: postgres:16
     container_name: b2b_postgres
     restart: unless-stopped
-
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-
+    
+    # Con esto basta. Docker inyectará todo tu .env automáticamente.
+    env_file:
+      - ../.env
+      
     ports:
-      - "${POSTGRES_PORT}:5432"
-
+      - "5432:5432"
+      
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -20,18 +18,14 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-
     container_name: b2b_streamlit
     restart: unless-stopped
-
     env_file:
       - ../.env
-
     ports:
-      - "5432:5432"
-
+      - "8501:8501"
     depends_on:
       - postgres
 
 volumes:
-  - postgres_data:/var/lib/postgresql/data
+  postgres_data:
