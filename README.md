@@ -19,3 +19,9 @@ docker-compose up -d postgres
 Nota: Verás que dice "Started b2b_postgres". Docker descargará la imagen (si no la tiene) y la encenderá en segundos.2.Vuelve a la raíz del proyecto:Asegurar la ruta de ejecución.Tu orquestador principal debe ejecutarse siempre desde la carpeta principal del proyecto, así que retrocede un nivel:Bashcd ..
 3.Ejecuta tu Orquestador E2E:La prueba de fuego.Ahora sí, con la base de datos esperando conexiones, lanza el pipeline completo:Bashpython -m src.main
 Si toda la configuración es correcta, verás en tu terminal cómo los datos se extraen (Fase 1), se aseguran en tu Data Lake de Amazon S3 (Fase 2) y, finalmente, se limpian y se inyectan en tu base de datos local en Docker (Fase 3), finalizando con el mensaje 🎉 PIPELINE E2E COMPLETADO EXITOSAMENTE.
+
+
+| Componente     | ¿Dónde vive?                        | ¿Tiene costo?           | Función                                                     |
+| -------------- | ----------------------------------- | ----------------------- | ----------------------------------------------------------- |
+| **Amazon S3**  | En la nube pública (AWS - Virginia) | Pago por uso (céntimos) | Bóveda de almacenamiento histórico a largo plazo.           |
+| **PostgreSQL** | En tu computador local (Docker)     | Gratis                  | Motor analítico rápido para consultar el inventario actual. |

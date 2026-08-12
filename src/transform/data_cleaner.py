@@ -22,14 +22,15 @@ def procesar_y_cargar_db(ruta_archivo_local):
         # 3. Conexión a la Base de Datos PostgreSQL (Docker)
         # Leemos las credenciales desde tu .env de forma segura
         pg_user = os.getenv("POSTGRES_USER")
-        pg_password = os.getenv("POSTGRES_PASSWORD")    
+        pg_pass = os.getenv("POSTGRES_PASSWORD")    
         pg_db = os.getenv("POSTGRES_DB")
         pg_port = os.getenv("POSTGRES_PORT", '5432')
 
 
         # Formato: postgresql://usuario:contraseña@host:puerto/nombre_bd
         # Estas credenciales hacen match exacto con tu docker-compose.yml
-        string_conexion = f"postgresql://{pg_user}:{pg_password}@{pg_port}/{pg_db}"
+        # Armamos el string de conexión dinámicamente asegurando que el host sea 'localhost'
+        string_conexion = f"postgresql://{pg_user}:{pg_pass}@localhost:{pg_port}/{pg_db}"
         motor_db = create_engine(string_conexion)
 
         # 4. Carga de datos (Load) a la tabla 'ventas_procesadas'
