@@ -1,6 +1,67 @@
 # b2b-inventory-pipeline
 
+# B2B Inventory Pipeline
 
+## 📌 Descripción
+
+Pipeline de datos para la gestión y análisis de inventario B2B.
+
+B2B Inventory Data Pipeline — Diseño e implementación de un pipeline de datos utilizando Python, PostgreSQL, Docker y Amazon S3, con dashboards interactivos desarrollados en Streamlit y Power BI para análisis de inventario y métricas de negocio.
+
+Python | SQL | PostgreSQL | Docker | AWS S3 |
+Streamlit | Power BI | Pandas | Git
+
+## 🏗️ Arquitectura
+
+[imagen de arquitectura]
+
+## 🛠️ Tecnologías
+
+- Python
+- Pandas
+- PostgreSQL
+- Docker
+- Amazon S3
+- Streamlit
+- Power BI
+- SQL
+- AWS
+
+## 📊 Dashboards
+
+### Streamlit
+
+[imagen]
+
+### Power BI
+
+[imagen]
+
+## 🚀 Ejecución
+
+### 1. Clonar repositorio
+
+git clone ...
+
+### 2. Crear entorno virtual
+
+python -m venv .venv
+
+### 3. Instalar dependencias
+
+pip install -r requirements.txt
+
+### 4. Configurar variables
+
+cp .env.example .env
+
+### 5. Levantar PostgreSQL
+
+docker compose -f docker/docker-compose.yml up -d postgres
+
+### 6. Ejecutar Streamlit
+
+streamlit run dashboards/app_streamlit.py
 
 
 
