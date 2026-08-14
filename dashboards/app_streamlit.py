@@ -27,7 +27,7 @@ def cargar_datos():
     return obtener_ventas_procesadas
 
 try:
-    df =  cargar_datos()
+    df =  cargar_datos
 
     # 2. Tarjetas de KPIs principales
     col1, col2, col3 = st.columns(3)
