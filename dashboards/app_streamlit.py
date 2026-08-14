@@ -5,9 +5,14 @@ import os
 ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(ruta_raiz)
 
+
 import streamlit as st
+import pandas as pd
+from sqlalchemy import create_engine
 import plotly.express as px
+
 from src.api import obtener_ventas_procesadas
+
 
 # Configuracion de la pagina 
 st.set_page_config(page_title="Dashboard Inventario", layout="wide")
