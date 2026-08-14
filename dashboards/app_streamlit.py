@@ -1,3 +1,10 @@
+import sys
+import os
+
+# 1. Le decimos a Python que busque módulos en la carpeta principal (un nivel arriba)
+ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(ruta_raiz)
+
 import streamlit as st
 import plotly.express as px
 from src.api import obtener_ventas_procesadas
