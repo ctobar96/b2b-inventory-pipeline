@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-from api import obtener_ventas_procesadas
+from src.api import obtener_ventas_procesadas
 
 # Configuracion de la pagina 
 st.set_page_config(page_title="Dashboard Inventario", layout="wide")
