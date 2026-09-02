@@ -1,88 +1,41 @@
-# b2b-inventory-pipeline
+# 📦 B2B Data Pipeline & Inventory Dashboard
 
-# B2B Inventory Pipeline
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg)
+![AWS S3](https://img.shields.io/badge/AWS-S3-FF9900.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B.svg)
 
-## 📌 Descripción
+## 📌 Visión General
+Este proyecto es una solución integral de ingeniería de datos (*End-to-End*) diseñada para la gestión operativa y financiera de **Comercializadora de Suministros Integrales SpA**. 
 
-Pipeline de datos para la gestión y análisis de inventario B2B.
+El sistema automatiza el procesamiento de ventas de inventario B2B, asegura el almacenamiento histórico en la nube y despliega métricas críticas de negocio (como ingresos netos y control de IVA mensual) en una interfaz interactiva de baja latencia.
 
-B2B Inventory Data Pipeline — Diseño e implementación de un pipeline de datos utilizando Python, PostgreSQL, Docker y Amazon S3, con dashboards interactivos desarrollados en Streamlit y Power BI para análisis de inventario y métricas de negocio.
+## 🏗️ Arquitectura de Datos
+El proyecto implementa un patrón de arquitectura moderna separando la capa de almacenamiento (Data Lake) de la capa de servicio, garantizando escalabilidad y alta disponibilidad.
 
-Python | SQL | PostgreSQL | Docker | AWS S3 |
-Streamlit | Power BI | Pandas | Git
+1. **Extracción y Transformación (ETL):** Un pipeline en Python procesa y limpia los datos crudos de transacciones.
+2. **Data Lake (AWS S3):** Los datos procesados se respaldan de manera inmutable en Amazon S3, asegurando un *Disaster Recovery* eficiente y un almacenamiento histórico de bajo costo.
+3. **Capa de Servicio (PostgreSQL):** Los datos estructurados se ingestan en una base de datos relacional para permitir consultas analíticas rápidas y optimizadas.
+4. **Visualización (Streamlit):** Un dashboard interactivo consume los datos directamente desde PostgreSQL, mostrando KPIs financieros y gráficos de distribución desarrollados con Plotly.
 
-## 🏗️ Arquitectura
+## 🛠️ Stack Tecnológico
+* **Lenguaje Principal:** Python
+* **Orquestación y Contenedores:** Docker & Docker Compose
+* **Base de Datos:** PostgreSQL
+* **Cloud Storage:** Boto3 (AWS S3)
+* **Manipulación de Datos:** Pandas, SQLAlchemy, psycopg2
+* **Frontend Analytics:** Streamlit, Plotly Express
 
-[imagen de arquitectura]
+## 🚀 Instalación y Ejecución Local
+El entorno está completamente dockerizado, lo que elimina el problema de "en mi máquina sí funciona".
 
-## 🛠️ Tecnologías
+### Prerrequisitos
+* Docker y Docker Compose instalados.
+* Archivo `.env` configurado en la raíz del proyecto con las credenciales de AWS y variables de PostgreSQL (ver `.env.example`).
 
-- Python
-- Pandas
-- PostgreSQL
-- Docker
-- Amazon S3
-- Streamlit
-- Power BI
-- SQL
-- AWS
-
-## 📊 Dashboards
-
-### Streamlit
-
-[imagen]
-
-### Power BI
-
-[imagen]
-
-## 🚀 Ejecución
-
-### 1. Clonar repositorio
-
-git clone ...
-
-### 2. Crear entorno virtual
-
-python -m venv .venv
-
-### 3. Instalar dependencias
-
-pip install -r requirements.txt
-
-### 4. Configurar variables
-
-cp .env.example .env
-
-### 5. Levantar PostgreSQL
-
-docker compose -f docker/docker-compose.yml up -d postgres
-
-### 6. Ejecutar Streamlit
-
-streamlit run dashboards/app_streamlit.py
-
-
-
-| Variable            | Significado                          | Tu valor           |
-| ------------------- | ------------------------------------ | ------------------ |
-| `POSTGRES_USER`     | Usuario de PostgreSQL                | `admin_datos`      |
-| `POSTGRES_PASSWORD` | Contraseña del usuario               | `superpassword123` |
-| `POSTGRES_DB`       | Base de datos inicial                | `b2b_analytics`    |
-| `POSTGRES_PORT`     | Puerto expuesto en tu máquina        | `5432`             |
-| `POSTGRES_HOST`     | Nombre del servidor dentro de Docker | `postgres`         |
-
-
-
-Para evitar esto y enfocarnos solo en la Fase 3, le diremos a Docker que levante exclusivamente el servicio de la base de datos.Sigue esta secuencia exacta en tu terminal:1.Inicia PostgreSQL:Levantar solo la base de datos.Primero, entra a la carpeta de Docker y levanta específicamente el servicio postgres en segundo plano (con la bandera -d):Bashcd docker
-docker-compose up -d postgres
-Nota: Verás que dice "Started b2b_postgres". Docker descargará la imagen (si no la tiene) y la encenderá en segundos.2.Vuelve a la raíz del proyecto:Asegurar la ruta de ejecución.Tu orquestador principal debe ejecutarse siempre desde la carpeta principal del proyecto, así que retrocede un nivel:Bashcd ..
-3.Ejecuta tu Orquestador E2E:La prueba de fuego.Ahora sí, con la base de datos esperando conexiones, lanza el pipeline completo:Bashpython -m src.main
-Si toda la configuración es correcta, verás en tu terminal cómo los datos se extraen (Fase 1), se aseguran en tu Data Lake de Amazon S3 (Fase 2) y, finalmente, se limpian y se inyectan en tu base de datos local en Docker (Fase 3), finalizando con el mensaje 🎉 PIPELINE E2E COMPLETADO EXITOSAMENTE.
-
-
-| Componente     | ¿Dónde vive?                        | ¿Tiene costo?           | Función                                                     |
-| -------------- | ----------------------------------- | ----------------------- | ----------------------------------------------------------- |
-| **Amazon S3**  | En la nube pública (AWS - Virginia) | Pago por uso (céntimos) | Bóveda de almacenamiento histórico a largo plazo.           |
-| **PostgreSQL** | En tu computador local (Docker)     | Gratis                  | Motor analítico rápido para consultar el inventario actual. |
+### Despliegue en 1 paso
+Para levantar la base de datos y la aplicación web simultáneamente, ejecuta:
+```bash
+cd docker
+docker compose up -d --build
