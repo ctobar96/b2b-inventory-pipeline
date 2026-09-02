@@ -24,10 +24,10 @@ st.markdown("---")
 # 1. Conectamos la fución externa con el caché de Streamlit
 @st.cache_data
 def cargar_datos():
-    return obtener_ventas_procesadas
+    return obtener_ventas_procesadas()
 
 try:
-    df =  cargar_datos
+    df =  cargar_datos()
 
     # 2. Tarjetas de KPIs principales
     col1, col2, col3 = st.columns(3)
@@ -36,7 +36,7 @@ try:
     total_iva = df['iva_clp'].sum()
     unidades_vendidas = df['cantidad_vendida'].sum()
 
-    col1.metric("Ingresos Totales (CLP)", f"{total_ventas:,0f}")
+    col1.metric("Ingresos Totales (CLP)", f"{total_ventas:.0f}")
     col2.metric("Control IVA mensual", f"{total_iva:,.0f}")
     col3.metric("Unidades Salientes", f"{unidades_vendidas:,}")
 
