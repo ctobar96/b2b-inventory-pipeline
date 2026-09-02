@@ -26,6 +26,9 @@ services:
       - "8501:8501"
     depends_on:
       - postgres
+    volumnes:
+      - ../src:/app/src
+      - ../dashboards:/app/dashboards
 
 volumes:
   postgres_data:
