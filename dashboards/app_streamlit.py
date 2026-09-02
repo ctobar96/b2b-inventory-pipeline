@@ -36,8 +36,8 @@ try:
     total_iva = df['iva_clp'].sum()
     unidades_vendidas = df['cantidad_vendida'].sum()
 
-    col1.metric("Ingresos Totales (CLP)", f"{total_ventas:.0f}")
-    col2.metric("Control IVA mensual", f"{total_iva:,.0f}")
+    col1.metric("Ingresos Totales (CLP)", f"${total_ventas:,.0f}")
+    col2.metric("Control IVA mensual", f"${total_iva:,.0f}")
     col3.metric("Unidades Salientes", f"{unidades_vendidas:,}")
 
     st.markdown("---")
