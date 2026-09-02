@@ -12,7 +12,12 @@ def obtener_ventas_procesadas():
     pg_db = os.getenv('POSTGRES_DB')
     pg_port = os.getenv('POSTGRES_PORT', '5432')
     
-    string_conexion = f"postgresql://{pg_user}:{pg_pass}@postgres:{pg_port}/{pg_db}"
+    # Buscamos el host en las variables de entorno. 
+    # Si no existe, usamos 'b2b_postgres' (el nombre de tu contenedor) por defecto.
+    pg_host = os.getenv('DB_HOST', 'b2b_postgres')
+    
+    # Inyectamos pg_host en lugar de la palabra fija
+    string_conexion = f"postgresql://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}"
     motor_db = create_engine(string_conexion)
     
     query = "SELECT * FROM ventas_procesadas"
