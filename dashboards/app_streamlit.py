@@ -36,9 +36,14 @@ try:
     total_iva = df['iva_clp'].sum()
     unidades_vendidas = df['cantidad_vendida'].sum()
 
-    col1.metric("Ingresos Totales (CLP)", f"${total_ventas:,.0f}")
-    col2.metric("Control IVA mensual", f"${total_iva:,.0f}")
-    col3.metric("Unidades Salientes", f"{unidades_vendidas:,}")
+    # Formateamos nativamente con coma y reemplazamos por punto
+    ventas_formateado = f"${total_ventas:,.0f}".replace(",", ".")
+    iva_formateado = f"${total_iva:,.0f}".replace(",", ".")
+    unidades_formateado = f"{unidades_vendidas:,}".replace(",", ".")
+
+    col1.metric("Ingresos Totales (CLP)", ventas_formateado)
+    col2.metric("Control IVA mensual", iva_formateado)
+    col3.metric("Unidades Salientes", unidades_formateado)
 
     st.markdown("---")
 
