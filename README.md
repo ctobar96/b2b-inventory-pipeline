@@ -128,7 +128,7 @@ Una vez que el script finalice exitosamente, recarga el dashboard en tu navegado
 
 ## 👨‍💻 Autor
 
-**Cristian Tobar Morales**
+**Cristian Tobar Morales**  
 *Data Scientist | Analytics Engineer*
 
 Especialista en análisis de datos, ingeniería de datos y desarrollo de soluciones basadas en datos. Este proyecto forma parte de mi portafolio técnico y tiene como objetivo demostrar la implementación de un pipeline de datos utilizando herramientas modernas de Data Engineering y Cloud.
