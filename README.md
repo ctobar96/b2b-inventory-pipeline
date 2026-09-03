@@ -72,8 +72,9 @@ El entorno de la aplicación y la base de datos están completamente dockerizado
 ### 1. Clonar el repositorio y configurar el entorno
 Descarga el proyecto y crea un entorno virtual local para ejecutar el pipeline ETL sin afectar tu sistema:
 ```bash
-git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/TU_USUARIO/TU_REPOSITORIO.git)
-cd TU_REPOSITORIO
+git clone https://github.com/ctobar96/b2b-inventory-pipeline.git
+
+cd b2b-inventory-pipeline
 
 # Crear y activar entorno virtual
 python -m venv venv
