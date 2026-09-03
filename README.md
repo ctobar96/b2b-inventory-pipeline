@@ -36,17 +36,34 @@ El proyecto implementa un patrón de arquitectura moderna separando la capa de a
 
 ## 📂 Estructura del Repositorio
 ```text
+## 📂 Estructura del Repositorio
+
+```text
+├── .devcontainer/             # Configuración de entorno de desarrollo (opcional)
+├── dashboards/
+│   └── dashboard.py           # Aplicación principal de Streamlit
+├── data/
+│   ├── processed/             # Datos procesados listos para ingesta (.gitkeep)
+│   └── raw/                   # Archivos CSV crudos de entrada para el ETL
 ├── docker/
 │   ├── docker-compose.yml     # Orquestación de servicios (Streamlit + BD)
-│   └── Dockerfile             # Imagen del entorno de la aplicación, instala requerimientos
+│   └── Dockerfile             # Imagen del entorno de la aplicación
+├── docs/
+│   ├── imagen1.png            # Capturas de pantalla para la documentación
+│   ├── imagen2.png            
+│   └── imagen3.png            
+├── powerbi/                   # (Extra) Dashboard alternativo en formato .pbix
 ├── src/
-│   ├── api.py                 # Conexión a PostgreSQL y extracción de datos
-│   └── etl.py                 # Lógica de procesamiento y carga a S3
-├── .env.example               # Plantilla de variables de entorno (Credenciales)
-├── .gitignore                 # Archivos ignorados por seguridad
-├── dashboard.py               # Aplicación principal y frontend
-├── requirements.txt           # Dependencias de Python
-└── README.md                  # Documentación del proyecto
+│   ├── extract/               # Módulos de extracción de datos (generador_b2b.py)
+│   ├── load/                  # Módulos de carga a Data Lake (s3_uploader.py)
+│   ├── transform/             # Módulos de limpieza (data_cleaner.py)
+│   └── api.py                 # Conexión a base de datos PostgreSQL
+├── .env.example               # Plantilla segura de variables de entorno
+├── .gitignore                 # Archivos y carpetas ignorados por seguridad
+├── LICENSE                    # Licencia del proyecto
+├── main.py                    # Script principal que orquesta el pipeline ETL
+├── README.md                  # Documentación del proyecto
+└── requirements.txt           # Dependencias de Python
 ```
 
 ## Configuración y Ejecución Local
