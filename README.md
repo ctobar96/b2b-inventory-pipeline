@@ -14,9 +14,9 @@ El sistema automatiza el procesamiento de ventas de inventario B2B, asegura el a
 > **Nota de Arquitectura:** Al tratarse de un panel de control B2B que maneja datos financieros sensibles (ingresos, control de IVA), el entorno de visualización está diseñado intencionalmente para ejecutarse en redes locales privadas (On-Premise) a través de contenedores Docker, garantizando que la información estratégica no quede expuesta en URLs públicas.
 
 ## Visualización del Dashboards
-![Dashboard Preview](dashboards/imagen1.png)
-![Dashboard Preview](dashboards/imagen2.png)
-![Dashboard Preview](dashboards/imagen3.png)
+![Dashboard Preview](docs/imagen1.png)
+![Dashboard Preview](docs/imagen2.png)
+![Dashboard Preview](docs/imagen3.png)
 
 ## 🏗️ Arquitectura de Datos
 El proyecto implementa un patrón de arquitectura moderna separando la capa de almacenamiento (Data Lake) de la capa de servicio, garantizando escalabilidad y alta disponibilidad.
